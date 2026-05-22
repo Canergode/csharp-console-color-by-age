@@ -1,0 +1,62 @@
+using System;
+
+namespace ConsoleColorByAge
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /* Example (commented out):
+            bool isAdult = IsAdult(); */
+
+            int digitSum = GetDigitSum();
+            Console.WriteLine("Digit sum: " + digitSum);
+
+            SetPageColor();
+            Console.ReadLine();
+        }
+
+        // Set background color based on digit sum and adult status
+        private static void SetPageColor()
+        {
+            if (GetDigitSum() % 2 == 0 || IsAdult())
+            {
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.Clear();
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.Clear();
+            }
+        }
+
+        // Get sum of age digits
+        private static int GetDigitSum()
+        {
+            int age  = CalculateAge();
+            int tens = age / 10;
+            int ones = age % 10;
+            return tens + ones;
+        }
+
+        // Check if user is 18 or older
+        private static bool IsAdult()
+        {
+            return CalculateAge() >= 18;
+        }
+
+        // Calculate age from birth year
+        private static int CalculateAge()
+        {
+            return DateTime.Today.Year - GetBirthYear();
+        }
+
+        // Get birth year from user
+        private static int GetBirthYear()
+        {
+            Console.WriteLine("Enter your birth year:");
+            return Convert.ToInt32(Console.ReadLine());
+        }
+    }
+}
